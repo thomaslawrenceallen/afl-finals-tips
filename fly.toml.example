@@ -1,0 +1,25 @@
+# Reference only. Run `fly launch --no-deploy` to generate your real fly.toml,
+# then make sure it contains the two things below: internal_port = 8000, and a
+# [mounts] block. Leave everything else fly generated as it is.
+
+app = "your-app-name-here"
+primary_region = "syd"
+
+[build]
+
+[http_service]
+  internal_port = 8000        # must match the Dockerfile's EXPOSE
+  force_https = true
+  auto_start_machines = true
+  auto_stop_machines = "stop"
+  min_machines_running = 0
+
+# Without this block the SQLite file lives on the ephemeral root filesystem
+# and every deploy wipes your comp.
+[mounts]
+  source = "tips_data"        # must match the name you passed to `fly volumes create`
+  destination = "/data"       # must match TIPS_DB in the Dockerfile
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

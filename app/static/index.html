@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Finals Tips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --board:#0E2119; --panel:#163024; --panel-2:#1D3B2D; --line:#2C5442;
+  --bone:#EFE8D5; --bone-dim:#9FB4A5; --ochre:#E0A83C; --oxide:#C05038;
+  --display:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--board);color:var(--bone);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+header{padding:22px 0 14px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--display);font-weight:700;font-size:38px;line-height:.9;letter-spacing:.04em;text-transform:uppercase;margin:0}
+h1 span{color:var(--ochre)}
+.who{font-family:var(--display);font-size:17px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--bone);padding:5px 12px;border-radius:2px;cursor:pointer}
+.who:hover{border-color:var(--ochre)}
+nav{display:flex;gap:2px;margin-top:16px;overflow-x:auto}
+nav button{font-family:var(--display);font-size:17px;letter-spacing:.09em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;color:var(--bone-dim);padding:8px 14px 7px;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{color:var(--bone);border-bottom-color:var(--ochre)}
+nav button:hover{color:var(--bone)}
+h2{font-family:var(--display);font-weight:600;font-size:24px;letter-spacing:.06em;text-transform:uppercase;margin:30px 0 10px}
+h3{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:.06em;text-transform:uppercase;margin:22px 0 8px}
+.eyebrow{font-family:var(--display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim)}
+p{margin:8px 0}
+.muted{color:var(--bone-dim)} .small{font-size:13px}
+a{color:var(--ochre)}
+input,select{font-family:var(--body);font-size:15px;background:var(--board);color:var(--bone);border:1px solid var(--line);border-radius:2px;padding:9px 10px;width:100%}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--ochre);outline-offset:1px}
+label{display:block;font-family:var(--display);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:4px}
+.field{margin-bottom:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>.field{flex:1;min-width:130px}
+.btn{font-family:var(--display);font-size:17px;letter-spacing:.08em;text-transform:uppercase;background:var(--ochre);color:#14261C;border:0;border-radius:2px;padding:10px 18px;cursor:pointer;font-weight:600}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:none;color:var(--bone);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--ochre);filter:none}
+.btn.danger{background:none;color:var(--oxide);border:1px solid var(--oxide)}
+.btn.sm{font-size:14px;padding:6px 12px}
+.btn[disabled]{opacity:.5;cursor:default}
+.game{background:var(--panel);border:1px solid var(--line);border-radius:3px;margin:12px 0;overflow:hidden}
+.game-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 13px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.game-body{padding:14px 13px}
+.sides{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.vs{font-family:var(--display);font-size:15px;letter-spacing:.1em;color:var(--bone-dim);align-self:center;padding:0 2px}
+.side{position:relative;background:var(--board);border:1px solid var(--line);border-radius:2px;padding:0 0 12px;cursor:pointer;text-align:center;color:var(--bone);width:100%;font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.side .bar{display:block;height:5px;margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.14)}
+.side .nm{display:block;padding:0 8px}
+.side .dog{display:inline-block;margin-top:6px;font-size:12px;letter-spacing:.12em;color:var(--oxide);border:1px solid var(--oxide);border-radius:2px;padding:1px 6px}
+.side[aria-pressed="true"]{border-color:var(--ochre);background:#1F3D2E;box-shadow:inset 0 0 0 1px var(--ochre)}
+.side[disabled]{cursor:default;opacity:.75}
+.margin{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px}
+.margin .lbl{font-family:var(--display);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim)}
+.step{font-family:var(--display);font-size:24px;line-height:1;background:var(--board);border:1px solid var(--line);color:var(--bone);width:40px;height:40px;border-radius:2px;cursor:pointer}
+.step:hover{border-color:var(--ochre)}
+.mval{font-family:var(--display);font-weight:700;font-size:30px;width:78px;text-align:center;padding:4px 0;font-variant-numeric:tabular-nums}
+.extras{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.extras .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tag{font-family:var(--display);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);border-radius:2px;padding:2px 7px;color:var(--bone-dim)}
+.tag.live{border-color:var(--ochre);color:var(--ochre)}
+.tag.lock{border-color:var(--oxide);color:var(--oxide)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-family:var(--display);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-dim);text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);font-weight:500}
+th:nth-child(-n+2){text-align:left}
+td{padding:9px 8px;border-bottom:1px solid rgba(44,84,66,.55);text-align:right}
+td:nth-child(-n+2){text-align:left}
+.pos{font-family:var(--display);font-size:18px;color:var(--bone-dim);width:30px}
+.pts{font-family:var(--display);font-weight:700;font-size:22px;color:var(--ochre)}
+tr.me td{background:rgba(224,168,60,.08)}
+.breakdown{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:12px 13px;margin:10px 0}
+.bline{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:14px}
+.bline .n{font-family:var(--display);font-variant-numeric:tabular-nums}
+.hit{color:var(--ochre)} .miss{color:var(--bone-dim)}
+.adj{color:var(--oxide);font-size:13px;padding-left:14px;position:relative}
+.adj::before{content:"\21B3";position:absolute;left:0}
+.adjrow{display:grid;grid-template-columns:1fr 78px 2fr auto;gap:8px;align-items:end;margin-bottom:8px}
+.adjrow .who{font-family:var(--body);font-size:14px;text-transform:none;letter-spacing:0;border:0;padding:0 0 9px;text-align:left}
+@media (max-width:520px){.adjrow{grid-template-columns:1fr 70px;grid-auto-rows:auto}}
+.empty{border:1px dashed var(--line);border-radius:3px;padding:26px 18px;text-align:center;color:var(--bone-dim)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:20px;max-width:420px;margin:34px auto}
+.err{color:var(--oxide);font-size:14px;margin:8px 0;min-height:20px}
+.linkbox{background:var(--board);border:1px solid var(--line);border-radius:2px;padding:10px;font-family:ui-monospace,monospace;font-size:13px;word-break:break-all;margin:8px 0}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ochre);color:#14261C;font-family:var(--display);letter-spacing:.08em;text-transform:uppercase;padding:9px 18px;border-radius:2px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+.toast.on{opacity:1}
+.hidden{display:none!important}
+.overlay{position:fixed;inset:0;background:rgba(6,16,12,.78);display:flex;align-items:center;justify-content:center;padding:20px;z-index:60}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:18px;width:100%;max-width:360px}
+.modal .row{justify-content:flex-end;margin-top:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:520px){h1{font-size:30px}.sides{grid-template-columns:1fr;gap:6px}.vs{text-align:center;padding:2px 0}.side{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header id="hdr" class="hidden">
+    <div class="brand">
+      <h1>Finals <span>Tips</span></h1>
+      <button class="who" id="whoBtn">…</button>
+    </div>
+    <nav role="tablist">
+      <button role="tab" data-view="tips" aria-selected="true">Tips</button>
+      <button role="tab" data-view="ladder" aria-selected="false">Ladder</button>
+      <button role="tab" data-view="admin" aria-selected="false">Admin</button>
+      <button role="tab" data-view="rules" aria-selected="false">Rules</button>
+    </nav>
+  </header>
+  <main id="main"></main>
+</div>
+
+<div class="overlay hidden" id="modal">
+  <div class="modal">
+    <div class="eyebrow" id="modalTitle" style="margin-bottom:10px"></div>
+    <div class="field" id="modalField" style="margin-bottom:0"><input id="modalInput"></div>
+    <div class="row">
+      <button class="btn ghost sm" id="modalCancel">Cancel</button>
+      <button class="btn sm" id="modalOk">Save</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<datalist id="clubs"></datalist>
+
+<script>
+const CLUBS = {
+  "Adelaide":"#002B5C","Brisbane Lions":"#A30046","Carlton":"#0E1E2E","Collingwood":"#111111",
+  "Essendon":"#CC2031","Fremantle":"#2A0D54","Geelong":"#1C3C63","Gold Coast":"#D93B33",
+  "GWS Giants":"#F26522","Hawthorn":"#5A2A08","Melbourne":"#12163A","North Melbourne":"#013B9F",
+  "Port Adelaide":"#01B4B4","Richmond":"#FFD200","St Kilda":"#ED0F05","Sydney":"#ED171F",
+  "West Coast":"#1B44C7","Western Bulldogs":"#014896"
+};
+
+const CODE = (location.pathname.match(/^\/c\/([A-Za-z0-9_-]+)/) || [])[1] || '';
+let TOKEN = CODE ? localStorage.getItem('tips:' + CODE) : null;
+let ST = null, VIEW = 'tips', OPEN_ROUND = null, PENDING = {};
+
+const el = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){ const t=el('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),1800); }
+
+async function api(method, path, body){
+  const r = await fetch(path, {
+    method,
+    headers: Object.assign({'Content-Type':'application/json'}, TOKEN ? {Authorization:'Bearer '+TOKEN} : {}),
+    body: body === undefined ? undefined : JSON.stringify(body)
+  });
+  const data = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(data.detail || 'Request failed');
+  return data;
+}
+const capi = (m, p, b) => api(m, `/api/comps/${CODE}${p}`, b);
+
+/* in-page dialog (prompt/confirm are unreliable in embedded frames) */
+function dialog(title, {value=null, okLabel='Save'}={}){
+  return new Promise(res=>{
+    const m=el('modal'), inp=el('modalInput'), fld=el('modalField');
+    const wantsInput = value !== null;
+    el('modalTitle').textContent = title;
+    fld.classList.toggle('hidden', !wantsInput);
+    if(wantsInput) inp.value = value;
+    el('modalOk').textContent = okLabel;
+    m.classList.remove('hidden');
+    if(wantsInput) setTimeout(()=>{inp.focus(); inp.select();},0);
+    const finish = v => { m.classList.add('hidden'); document.removeEventListener('keydown', key); res(v); };
+    function key(e){ if(e.key==='Escape') finish(null); else if(e.key==='Enter' && wantsInput) finish(inp.value); }
+    document.addEventListener('keydown', key);
+    el('modalOk').onclick = () => finish(wantsInput ? inp.value : true);
+    el('modalCancel').onclick = () => finish(null);
+  });
+}
+const ask = (t,v='') => dialog(t,{value:v});
+const confirmBox = t => dialog(t,{okLabel:'Delete'}).then(r => r === true);
+
+function toLocalInput(iso){
+  if(!iso) return '';
+  const d = new Date(iso); if(isNaN(d)) return '';
+  const p = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+const fromLocalInput = v => { if(!v) return null; const d = new Date(v); return isNaN(d) ? null : d.toISOString(); };
+function fmtWhen(iso){
+  if(!iso) return 'Time TBC';
+  const d = new Date(iso); if(isNaN(d)) return 'Time TBC';
+  return d.toLocaleString('en-AU',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
+}
+
+/* ---------------- gate: create / join ---------------- */
+async function boot(){
+  el('clubs').innerHTML = Object.keys(CLUBS).map(c=>`<option value="${c}">`).join('');
+  if(!CODE) return screenCreate();
+  if(!TOKEN) return screenJoin();
+  try { ST = await capi('GET','/state'); }
+  catch(e){ TOKEN = null; localStorage.removeItem('tips:'+CODE); return screenJoin(e.message); }
+  el('hdr').classList.remove('hidden');
+  if(ST.rounds.length) OPEN_ROUND = ST.rounds[ST.rounds.length-1].id;
+  render();
+}
+
+function screenCreate(){
+  el('main').innerHTML = `<div class="card">
+    <h2 style="margin-top:0">Start a comp</h2>
+    <p class="small muted">You'll get a secret link to send your mates. Only people with that link can find it.</p>
+    <div class="field"><label>Comp name</label><input id="cName" placeholder="Finals 2026"></div>
+    <div class="field"><label>Your name</label><input id="cYou"></div>
+    <div class="field"><label>Your password</label><input id="cYouPw" type="password" autocomplete="new-password"></div>
+    <div class="field"><label>Join password (mates need this)</label><input id="cJoin" placeholder="Leave blank for link-only"></div>
+    <div class="field"><label>Admin password (fixtures and results)</label><input id="cAdmin" type="password" autocomplete="new-password"></div>
+    <div class="err" id="cErr"></div>
+    <button class="btn" id="cGo">Create comp</button>
+  </div>`;
+  el('cGo').onclick = async () => {
+    el('cErr').textContent = '';
+    try{
+      const r = await api('POST','/api/comps',{
+        name: el('cName').value.trim(), your_name: el('cYou').value.trim(),
+        your_password: el('cYouPw').value, join_password: el('cJoin').value.trim(),
+        admin_password: el('cAdmin').value
+      });
+      localStorage.setItem('tips:'+r.code, r.token);
+      location.href = '/c/' + r.code;
+    }catch(e){ el('cErr').textContent = e.message; }
+  };
+}
+
+async function screenJoin(msg){
+  let meta = null;
+  try{ meta = await api('GET', `/api/comps/${CODE}`); }
+  catch(e){ el('main').innerHTML = `<div class="card"><h2 style="margin-top:0">Dead link</h2><p class="muted small">${esc(e.message)}</p></div>`; return; }
+  el('main').innerHTML = `<div class="card">
+    <div class="eyebrow">${esc(meta.name)}</div>
+    <h2 style="margin:6px 0 4px">Get in</h2>
+    <p class="small muted">${meta.players} already in. New here? Pick a name and password. Been here before? Same details.</p>
+    <div class="field"><label>Name</label><input id="jName"></div>
+    <div class="field"><label>Password</label><input id="jPw" type="password"></div>
+    ${meta.needs_join_password ? `<div class="field"><label>Join password</label><input id="jJoin"></div>` : ''}
+    <div class="err" id="jErr">${esc(msg||'')}</div>
+    <div class="row"><button class="btn" id="jNew">Join</button><button class="btn ghost" id="jBack">Sign in</button></div>
+  </div>`;
+  const go = async (path, extra) => {
+    el('jErr').textContent = '';
+    try{
+      const r = await capi('POST', path, Object.assign({name: el('jName').value.trim(), password: el('jPw').value}, extra));
+      TOKEN = r.token; localStorage.setItem('tips:'+CODE, TOKEN);
+      location.reload();
+    }catch(e){ el('jErr').textContent = e.message; }
+  };
+  el('jNew').onclick = () => go('/register', {join_password: el('jJoin') ? el('jJoin').value.trim() : ''});
+  el('jBack').onclick = () => go('/login', {});
+}
+
+async function refresh(){ ST = await capi('GET','/state'); render(); }
+
+/* ---------------- shell ---------------- */
+function render(){
+  document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.view===VIEW)));
+  el('whoBtn').textContent = ST.me.name;
+  if(VIEW==='tips') renderTips();
+  if(VIEW==='ladder') renderLadder();
+  if(VIEW==='admin') renderAdmin();
+  if(VIEW==='rules') renderRules();
+}
+function curRound(){ return ST.rounds.find(r=>r.id===OPEN_ROUND) || ST.rounds[ST.rounds.length-1]; }
+function roundPicker(){
+  if(ST.rounds.length < 2) return '';
+  return `<div class="row" style="margin-top:18px;gap:6px">` + ST.rounds.map(r =>
+    `<button class="btn ghost sm" style="${r.id===curRound().id?'border-color:var(--ochre);color:var(--ochre)':''}" onclick="OPEN_ROUND=${r.id};render()">${esc(r.name)}</button>`
+  ).join('') + `</div>`;
+}
+
+/* ---------------- tips ---------------- */
+function renderTips(){
+  if(!ST.rounds.length){
+    el('main').innerHTML = `<div class="empty" style="margin-top:28px"><p><strong>No games in yet.</strong></p>
+      <p class="small">${ST.me.is_admin ? 'Add the fixtures in Admin.' : 'Your admin has not put the fixtures up yet.'}</p>
+      ${ST.me.is_admin ? `<p><button class="btn" onclick="VIEW='admin';render()">Open Admin</button></p>` : ''}</div>`;
+    return;
+  }
+  const rd = curRound(); OPEN_ROUND = rd.id;
+  let h = roundPicker() + `<h2>${esc(rd.name)}</h2>`;
+  if(!rd.games.length) h += `<div class="empty">No games in this round yet.</div>`;
+  for(const g of rd.games){
+    const t = Object.assign({winner:null,margin:12,extras:{}}, g.my_tip||{}, PENDING[g.id]||{});
+    h += `<div class="game">
+      <div class="game-head">
+        <span class="eyebrow">${esc(g.label||'Final')} · ${esc(fmtWhen(g.start))}</span>
+        <span>${g.featured?'<span class="tag live">Opener</span> ':''}${g.locked?'<span class="tag lock">Locked</span>':'<span class="tag live">Open</span>'}</span>
+      </div>
+      <div class="game-body">
+        <div class="sides">
+          ${side(g,'home',t)}<span class="vs">v</span>${side(g,'away',t)}
+        </div>
+        <div class="margin">
+          <span class="lbl">Margin</span>
+          <button class="step" ${g.locked?'disabled':''} onclick="bump(${g.id},-1)">−</button>
+          <input class="mval" type="number" min="1" max="200" value="${Number(t.margin)||12}" ${g.locked?'disabled':''} oninput="setMargin(${g.id},this.value)">
+          <button class="step" ${g.locked?'disabled':''} onclick="bump(${g.id},1)">+</button>
+        </div>
+        ${g.featured ? extrasBlock(g,t) : ''}
+        ${g.result ? myScore(g) : ''}
+      </div></div>`;
+  }
+  h += `<p class="small muted" style="margin-top:16px">Tips save as you go. The server refuses anything sent after first bounce.</p>`;
+  el('main').innerHTML = h;
+}
+function side(g, s, t){
+  const nm = g[s] || (s==='home'?'Home':'Away');
+  const isDog = g.favourite && g.favourite !== s;
+  return `<button class="side" aria-pressed="${t.winner===s}" ${g.locked?'disabled':''} onclick="pick(${g.id},'${s}')">
+    <span class="bar" style="background:${CLUBS[nm]||'#2C5442'}"></span><span class="nm">${esc(nm)}</span>
+    ${isDog?`<span class="dog">Underdog · ${ST.scoring.underdog}pts</span>`:''}</button>`;
+}
+function extrasBlock(g, t){
+  const ex = t.extras || {};
+  return `<div class="extras"><div class="eyebrow" style="margin-bottom:8px">Opening game bonuses — surnames are enough</div>
+    <div class="grid">
+      <div class="field"><label>First goal</label><input value="${esc(ex.fgs||'')}" ${g.locked?'disabled':''} oninput="setExtra(${g.id},'fgs',this.value)"></div>
+      <div class="field"><label>Most goals</label><input value="${esc(ex.goals||'')}" ${g.locked?'disabled':''} oninput="setExtra(${g.id},'goals',this.value)"></div>
+      <div class="field"><label>Most disposals</label><input value="${esc(ex.disp||'')}" ${g.locked?'disabled':''} oninput="setExtra(${g.id},'disp',this.value)"></div>
+    </div></div>`;
+}
+function resultText(g){
+  const r = g.result; if(!r) return '';
+  return r.margin ? `${esc(g[r.winner] || r.winner)} by ${r.margin}` : 'Drawn game';
+}
+function myScore(g){
+  const s = g.scores[ST.me.id]; if(!s) return '';
+  return `<div class="extras"><div class="eyebrow" style="margin-bottom:6px">Final: ${resultText(g)} · you scored ${s.total}</div>` +
+    s.lines.map(l=>`<div class="bline"><span class="${l.hit?'hit':'miss'}">${esc(l.label)}</span><span class="n ${l.hit?'hit':'miss'}">${l.pts}</span></div>`).join('') + `</div>`;
+}
+
+let saveTimer = null;
+function stage(gid, patch){
+  const g = ST.rounds.flatMap(r=>r.games).find(x=>x.id===gid);
+  PENDING[gid] = Object.assign({winner:null,margin:12,extras:{}}, g.my_tip||{}, PENDING[gid]||{}, patch);
+  clearTimeout(saveTimer); saveTimer = setTimeout(flush, 600);
+}
+async function flush(){
+  const body = Object.entries(PENDING).map(([gid,t]) => ({game_id:+gid, winner:t.winner, margin: clampTip(Number(t.margin) || 12), extras:t.extras||{}}));
+  if(!body.length) return;
+  try{
+    const r = await capi('PUT','/tips', body);
+    PENDING = {};
+    if(r.rejected.length) { toast('Some tips were locked'); await refresh(); }
+    else { ST = await capi('GET','/state'); }
+  }catch(e){ toast(e.message); }
+}
+function pick(gid, s){
+  const g = ST.rounds.flatMap(r=>r.games).find(x=>x.id===gid);
+  const cur = Object.assign({}, g.my_tip||{}, PENDING[gid]||{});
+  stage(gid, {winner: cur.winner === s ? null : s}); renderTips();
+}
+const clampTip = n => Math.max(1, Math.min(200, n));   // 1-200: no draws, no negatives
+function setMargin(gid, v){ stage(gid, {margin: clampTip(parseInt(v,10) || 1)}); }
+function bump(gid, d){
+  const g = ST.rounds.flatMap(r=>r.games).find(x=>x.id===gid);
+  const cur = Object.assign({margin:12}, g.my_tip||{}, PENDING[gid]||{});
+  stage(gid, {margin: clampTip((Number(cur.margin) || 12) + d)}); renderTips();
+}
+function setExtra(gid, k, v){
+  const g = ST.rounds.flatMap(r=>r.games).find(x=>x.id===gid);
+  const cur = Object.assign({}, (g.my_tip||{}).extras||{}, (PENDING[gid]||{}).extras||{});
+  cur[k] = v; stage(gid, {extras: cur});
+}
+
+/* ---------------- ladder ---------------- */
+function renderLadder(){
+  const names = Object.fromEntries(ST.players.map(p=>[p.id,p.name]));
+  let h = `<h2>Ladder</h2><table><thead><tr><th class="pos">#</th><th>Tipper</th>`;
+  for(const r of ST.rounds) h += `<th>${esc(r.name.slice(0,7))}</th>`;
+  h += `<th>Pts</th></tr></thead><tbody>`;
+  ST.ladder.forEach((p,i)=>{
+    h += `<tr class="${p.id===ST.me.id?'me':''}"><td class="pos">${i+1}</td><td>${esc(p.name)}</td>`;
+    for(const r of ST.rounds){
+      const sub = r.games.reduce((a,g)=> a + ((g.scores[p.id]||{}).total||0), 0);
+      h += `<td>${sub}</td>`;
+    }
+    h += `<td class="pts">${p.total}</td></tr>`;
+  });
+  h += `</tbody></table><h3>Who tipped what</h3>` + roundPicker();
+  for(const g of curRound().games){
+    h += `<div class="breakdown"><div class="eyebrow" style="margin-bottom:6px">${esc(g.home)} v ${esc(g.away)}${g.result?` · ${resultText(g)}`:''}</div>`;
+    if(!g.locked) h += `<div class="small muted">Sealed until the bounce.</div>`;
+    else for(const p of ST.ladder){
+      const t = g.tips[p.id];
+      const s = g.scores[p.id];
+      const txt = t && t.winner ? `${esc(g[t.winner])} by ${t.margin||0}` : '<span class="miss">no tip</span>';
+      h += `<div class="bline"><span>${esc(p.name)} — ${txt}</span><span class="n ${s&&s.total?'hit':'miss'}">${s?s.total:'–'}</span></div>`;
+      const adj = (g.adjustments||{})[p.id];
+      if(adj) h += `<div class="bline adj"><span>Adjusted by admin${adj.reason?': '+esc(adj.reason):''}</span><span class="n">${adj.points>0?'+':''}${adj.points}</span></div>`;
+    }
+    h += `</div>`;
+  }
+  el('main').innerHTML = h;
+}
+
+/* ---------------- admin ---------------- */
+function renderAdmin(){
+  if(!ST.me.is_admin){
+    el('main').innerHTML = `<div class="card"><h2 style="margin-top:0">Admin</h2>
+      <p class="small muted">Fixtures, odds and results live here.</p>
+      <div class="field"><label>Admin password</label><input id="aPw" type="password"></div>
+      <div class="err" id="aErr"></div><button class="btn" id="aGo">Unlock</button></div>`;
+    el('aGo').onclick = async () => {
+      try{ await capi('POST','/admin',{password: el('aPw').value}); await refresh(); }
+      catch(e){ el('aErr').textContent = e.message; }
+    };
+    return;
+  }
+  const link = location.origin + '/c/' + ST.comp.code;
+  let h = `<h2>Admin</h2>
+    <div class="breakdown"><div class="eyebrow">Secret link — send this to your mates</div>
+      <div class="linkbox">${esc(link)}</div>
+      <button class="btn ghost sm" onclick="navigator.clipboard.writeText('${esc(link)}').then(()=>toast('Link copied'))">Copy link</button></div>
+    <div class="row"><button class="btn" onclick="addRound()">Add a round</button>
+      <button class="btn ghost" onclick="toggleLock()">${ST.comp.lock_all?'Unlock all tipping':'Lock all tipping'}</button></div>`;
+
+  for(const rd of ST.rounds){
+    h += `<h3>${esc(rd.name)} <button class="btn ghost sm" onclick="renameRound(${rd.id})">Rename</button>
+      <button class="btn danger sm" onclick="delRound(${rd.id})">Delete</button></h3>
+      <button class="btn sm" onclick="addGame(${rd.id})">Add a game</button>`;
+    for(const g of rd.games){
+      h += `<div class="game"><div class="game-head">
+        <span class="eyebrow">${esc(g.home||'—')} v ${esc(g.away||'—')}</span>
+        <button class="btn danger sm" onclick="delGame(${g.id})">Remove</button></div>
+        <div class="game-body" data-game="${g.id}">
+        <div class="row">
+          <div class="field"><label>Home</label><input list="clubs" data-f="home" value="${esc(g.home)}" onchange="saveGame(${g.id})"></div>
+          <div class="field"><label>Away</label><input list="clubs" data-f="away" value="${esc(g.away)}" onchange="saveGame(${g.id})"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Label</label><input data-f="label" placeholder="Qualifying Final" value="${esc(g.label)}" onchange="saveGame(${g.id})"></div>
+          <div class="field"><label>First bounce (your time)</label><input type="datetime-local" data-f="start" value="${toLocalInput(g.start)}" onchange="saveGame(${g.id})"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Favourite (Sportsbet)</label><select data-f="favourite" onchange="saveGame(${g.id})">
+            <option value=""${!g.favourite?' selected':''}>Not set — no underdog bonus</option>
+            <option value="home"${g.favourite==='home'?' selected':''}>${esc(g.home||'Home')}</option>
+            <option value="away"${g.favourite==='away'?' selected':''}>${esc(g.away||'Away')}</option></select></div>
+          <div class="field"><label>Opening game</label><select data-f="featured" onchange="saveGame(${g.id})">
+            <option value="0"${g.featured?'':' selected'}>No</option>
+            <option value="1"${g.featured?' selected':''}>Yes — bonuses apply</option></select></div>
+        </div>
+        ${resultForm(g)}
+        ${adjustForm(g)}
+        </div></div>`;
+    }
+  }
+  h += `<h3>Scoring</h3><div class="row">` +
+    [['Winner','pick'],['Underdog winner','underdog'],['Exact margin','m_exact'],['Margin 1–5 out','m_close'],
+     ['Margin 6–10 out','m_far'],['First goal','fgs'],['Most goals','goals1'],['Second most goals','goals2'],
+     ['Most disposals','disp1'],['Second most disposals','disp2']]
+    .map(([l,k])=>`<div class="field" style="min-width:120px"><label>${l}</label><input type="number" value="${ST.scoring[k]}" onchange="setScore('${k}',parseInt(this.value,10)||0)"></div>`).join('') +
+  `</div>
+  <div class="field"><label>Margin points when the winner is tipped wrong</label><select onchange="setScore('margin_only_if_correct', this.value==='1')">
+    <option value="0"${!ST.scoring.margin_only_if_correct?' selected':''}>Still score on how close the number was</option>
+    <option value="1"${ST.scoring.margin_only_if_correct?' selected':''}>No margin points unless the winner is right</option></select></div>
+  <div class="field"><label>Margin points on a drawn game</label><select onchange="setScore('margin_on_draw', this.value==='1')">
+    <option value="1"${ST.scoring.margin_on_draw?' selected':''}>Still score against a margin of 0</option>
+    <option value="0"${!ST.scoring.margin_on_draw?' selected':''}>Nothing at all on a draw</option></select></div>`;
+  el('main').innerHTML = h;
+}
+
+function resultForm(g){
+  const r = g.result || {};
+  let h = `<div class="extras"><div class="eyebrow" style="margin-bottom:8px">Result</div><div class="row">
+    <div class="field"><label>Won by</label><select data-r="winner">
+      <option value="home"${r.winner!=='away'?' selected':''}>${esc(g.home||'Home')}</option>
+      <option value="away"${r.winner==='away'?' selected':''}>${esc(g.away||'Away')}</option></select></div>
+    <div class="field"><label>Margin — 0 for a draw</label><input type="number" min="0" max="200" data-r="margin" value="${r.margin!=null?r.margin:''}"></div></div>`;
+  if(g.featured){
+    h += `<div class="row">
+      <div class="field"><label>First goal</label><input data-r="fgs" value="${esc(r.fgs||'')}"></div>
+      <div class="field"><label>Most goals</label><input data-r="goals1" value="${esc(r.goals1||'')}"></div>
+      <div class="field"><label>Second most goals</label><input data-r="goals2" value="${esc(r.goals2||'')}"></div></div>
+      <div class="row">
+      <div class="field"><label>Most disposals</label><input data-r="disp1" value="${esc(r.disp1||'')}"></div>
+      <div class="field"><label>Second most disposals</label><input data-r="disp2" value="${esc(r.disp2||'')}"></div></div>`;
+  }
+  return h + `<div class="row"><button class="btn sm" onclick="saveResult(${g.id})">Save result</button>
+    ${g.result?`<button class="btn ghost sm" onclick="clearResult(${g.id})">Clear result</button>`:''}</div></div>`;
+}
+
+function adjustForm(g){
+  const adj = g.adjustments || {};
+  const rows = ST.players.map(p => {
+    const a = adj[p.id] || {};
+    return `<div class="adjrow">
+      <div class="field" style="margin:0"><label class="who">${esc(p.name)}</label></div>
+      <div class="field" style="margin:0"><input type="number" data-adj="pts-${p.id}" value="${a.points!=null?a.points:''}" placeholder="0"></div>
+      <div class="field" style="margin:0"><input data-adj="why-${p.id}" value="${esc(a.reason||'')}" placeholder="Reason (everyone sees this)"></div>
+      <button class="btn ghost sm" onclick="saveAdjust(${g.id},${p.id})">Apply</button>
+    </div>`;
+  }).join('');
+  return `<div class="extras">
+    <div class="eyebrow" style="margin-bottom:8px">Manual adjustment</div>
+    <p class="small muted" style="margin-top:0">Corrects a total without touching anyone's lodged tip. Use a negative number to take points off, or 0 to clear. The reason is shown to everyone under Who tipped what.</p>
+    ${rows}</div>`;
+}
+
+const gbox = gid => document.querySelector(`[data-game="${gid}"]`);
+const fval = (gid, f) => { const n = gbox(gid).querySelector(`[data-f="${f}"]`); return n ? n.value : ''; };
+const rval = (gid, f) => { const n = gbox(gid).querySelector(`[data-r="${f}"]`); return n ? n.value.trim() : ''; };
+
+async function guard(fn){ try{ await fn(); await refresh(); }catch(e){ toast(e.message); } }
+const addRound   = () => ask('Round name','Week '+(ST.rounds.length+1)).then(n => n && guard(()=>capi('POST','/rounds',{name:n})));
+const renameRound= id => { const rd = ST.rounds.find(r=>r.id===id);
+  return ask('Round name', rd ? rd.name : '').then(n => n && guard(()=>capi('PATCH',`/rounds/${id}`,{name:n}))); };
+const delRound   = id => confirmBox('Delete this round and its games?').then(y => y && guard(()=>capi('DELETE',`/rounds/${id}`)));
+const addGame    = rid => guard(()=>capi('POST',`/rounds/${rid}/games`,{featured:false}));
+const delGame    = id => confirmBox('Remove this game?').then(y => y && guard(()=>capi('DELETE',`/games/${id}`)));
+const clearResult= id => guard(()=>capi('DELETE',`/games/${id}/result`));
+const toggleLock = () => guard(()=>capi('PUT','/lock',{lock_all: !ST.comp.lock_all}));
+const setScore   = (k,v) => guard(()=>capi('PUT','/scoring', Object.assign({}, ST.scoring, {[k]:v})));
+
+const saveGame = id => guard(()=>capi('PATCH',`/games/${id}`,{
+  home:fval(id,'home'), away:fval(id,'away'), label:fval(id,'label'),
+  start:fromLocalInput(fval(id,'start')), favourite:fval(id,'favourite'), featured:fval(id,'featured')==='1'
+}));
+
+function saveAdjust(gid, pid){
+  const box = gbox(gid);
+  const pts = parseInt((box.querySelector(`[data-adj="pts-${pid}"]`) || {}).value, 10) || 0;
+  const why = ((box.querySelector(`[data-adj="why-${pid}"]`) || {}).value || '').trim();
+  guard(()=>capi('PUT',`/games/${gid}/adjust/${pid}`,{points:pts, reason:why})
+    .then(()=>toast(pts ? 'Adjustment applied' : 'Adjustment cleared')));
+}
+
+function saveResult(id){
+  const m = parseInt(rval(id,'margin'),10);
+  if(isNaN(m) || m < 0) return toast('Enter the margin');
+  guard(()=>capi('PUT',`/games/${id}/result`,{winner:rval(id,'winner')||'home', margin:m,
+    fgs:rval(id,'fgs'), goals1:rval(id,'goals1'), goals2:rval(id,'goals2'),
+    disp1:rval(id,'disp1'), disp2:rval(id,'disp2')}));
+}
+
+/* ---------------- rules ---------------- */
+function renderRules(){
+  const s = ST.scoring;
+  el('main').innerHTML = `<h2>How it scores</h2>
+  <div class="breakdown"><div class="eyebrow" style="margin-bottom:8px">Every game</div>
+    ${[['Tipping the winner',s.pick],['Tipping the winner when they were the underdog',s.underdog],['Drawn game',0],
+       ['Margin spot on',s.m_exact],['Margin within 5',s.m_close],['Margin within 10',s.m_far]]
+      .map(([l,v])=>`<div class="bline"><span>${l}</span><span class="n">${v}</span></div>`).join('')}</div>
+  <div class="breakdown"><div class="eyebrow" style="margin-bottom:8px">Opening game of the round only</div>
+    ${[['First goal of the match',s.fgs],['Leading goalkicker',s.goals1],['Named the second-highest goalkicker instead',s.goals2],
+       ['Most disposals',s.disp1],['Named the second-highest instead',s.disp2]]
+      .map(([l,v])=>`<div class="bline"><span>${l}</span><span class="n">${v}</span></div>`).join('')}</div>
+  <h3>The fine print</h3>
+  <p class="small muted">Underdog points replace the ${s.pick}, they don't stack on top. The admin marks the outsider when the round goes up.</p>
+  <p class="small muted">Margin is judged on the whole picture: tip Geelong by 10 when Sydney win by 10 and you're 20 out. ${s.margin_only_if_correct?'Margin also needs the right winner.':'A close number still pays even with the wrong winner.'}</p>
+  <p class="small muted">${s.margin_on_draw?'A draw pays no tip points, but margin still scores against 0.':'A draw pays nothing at all.'}</p>
+  <p class="small muted">Margins run 1 to 200, so you can't tip a draw. If a game is drawn nobody gets the tip points either way.</p>
+  <p class="small muted">Player names match on surname, so "Gawn", "M Gawn" and "Max Gawn" all count the same.</p>
+  <p class="small muted">Everyone's tips stay sealed on the server until first bounce, and points are only ever worked out server-side.</p>`;
+}
+
+/* ---------------- boot ---------------- */
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => { VIEW = b.dataset.view; render(); });
+el('whoBtn').onclick = () => dialog(`Sign out of ${ST.comp.name}?`, {okLabel:'Sign out'}).then(y => {
+  if(y === true){ localStorage.removeItem('tips:'+CODE); location.reload(); }
+});
+setInterval(()=>{ if(ST && VIEW==='tips') refresh().catch(()=>{}); }, 60000);
+boot();
+</script>
+</body>
+</html>
